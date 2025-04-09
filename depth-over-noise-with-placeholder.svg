@@ -1,0 +1,41 @@
+<svg viewBox="0 0 500 450" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f6ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <rect width="500" height="450" fill="url(#bgGradient)" rx="15" ry="15" />
+  
+  <!-- Title area -->
+  <rect x="40" y="25" width="420" height="60" rx="10" ry="10" fill="#205493" filter="url(#shadow)" />
+  <text x="250" y="65" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle" font-weight="bold">Depth Over Noise</text>
+  
+  <!-- Image placeholder area -->
+  <rect x="75" y="105" width="350" height="220" fill="#e9ecef" rx="8" ry="8" stroke="#ced4da" stroke-width="2" stroke-dasharray="5,5" />
+  
+  <!-- Icon for image placeholder -->
+  <g transform="translate(250, 215)">
+    <rect x="-40" y="-30" width="80" height="60" fill="#adb5bd" rx="4" ry="4" />
+    <circle cx="0" cy="-5" r="10" fill="#dee2e6" />
+    <path d="M-30,20 L-20,0 L-10,10 L10,-15 L20,5 L30,10 L30,20 L-30,20 Z" fill="#dee2e6" />
+    <text x="0" y="-50" font-family="Arial, sans-serif" font-size="12" fill="#495057" text-anchor="middle">Insert image here from Unsplash/Pexels/Wikimedia</text>
+    <text x="0" y="50" font-family="Arial, sans-serif" font-size="12" fill="#495057" text-anchor="middle">Recommended: Deep sea diver or ocean depth imagery</text>
+  </g>
+  
+  <!-- Technical note about implementing the image -->
+  <rect x="50" y="340" width="400" height="85" rx="8" ry="8" fill="#fff8e1" stroke="#ffd54f" stroke-width="1" />
+  <text x="250" y="360" font-family="Arial, sans-serif" font-size="12" fill="#5d4037" text-anchor="middle" font-weight="bold">IMPLEMENTATION NOTE</text>
+  <text x="250" y="380" font-family="Arial, sans-serif" font-size="11" fill="#5d4037" text-anchor="middle">For HTML: <tspan font-family="monospace">&#60;img src="https://source.unsplash.com/featured/?ocean,deep,diver" alt="..."&#62;</tspan></text>
+  <text x="250" y="400" font-family="Arial, sans-serif" font-size="11" fill="#5d4037" text-anchor="middle">For SVG: Use <tspan font-family="monospace">&#60;image xlink:href="[local-image-path]" width="350" height="220" x="75" y="105"/&#62;</tspan></text>
+  <text x="250" y="415" font-family="Arial, sans-serif" font-size="10" fill="#5d4037" text-anchor="middle">(Note: SVGs often can't directly load external web images due to security restrictions)</text>
+  
+  <!-- Caption area -->
+  <rect x="70" y="190" width="360" height="40" rx="8" ry="8" fill="#ffffff" filter="url(#shadow)" />
+  <text x="250" y="215" font-family="Arial, sans-serif" font-size="16" fill="#333333" text-anchor="middle">Finding valuable insights beneath surface distractions</text>
+</svg>
