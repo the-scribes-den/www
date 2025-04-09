@@ -11,11 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.querySelector('.overlay');
     const body = document.body;
     const nav = document.getElementById('main-nav');
-    const scrollTopBtn = document.getElementById('scrollTop');
+    const scrollTopBtn = document.querySelector('.scroll-to-top'); // Updated to match your HTML class
     const fadeElements = document.querySelectorAll('.fade-in');
     
     // ================ MOBILE MENU TOGGLE ================
     function toggleMenu() {
+        const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
         navLinks.classList.toggle('active');
         overlay.classList.toggle('active');
         mobileMenuBtn.classList.toggle('active');
@@ -43,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
+    } else {
+        console.warn('Mobile menu elements not found. Check selectors: .mobile-menu-btn, .nav-links, .overlay');
     }
     
     // ================ STICKY NAVIGATION ================
@@ -80,6 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 behavior: 'smooth'
             });
         });
+    } else {
+        console.warn('Scroll-to-top button not found. Check selector: .scroll-to-top');
     }
     
     // ================ FADE-IN ANIMATIONS ================
@@ -148,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Close menu with ESC key
             if (isEscPressed && navLinks.classList.contains('active')) {
                 toggleMenu();
+                mobileMenuBtn.focus(); // Return focus to menu button
                 return;
             }
             
@@ -171,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ================ FORM VALIDATION ================
-    // Handle newsletter form submission
+    // Handle newsletter form submission (not in current HTML, but kept for future use)
     const newsletterForm = document.querySelector('.newsletter-form');
     
     if (newsletterForm) {
@@ -182,11 +189,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = emailInput.value.trim();
             
             if (isValidEmail(email)) {
-                // Success - would normally send to server
                 showFormMessage(newsletterForm, 'Thank you for subscribing!', 'success');
                 emailInput.value = '';
             } else {
-                // Error
                 showFormMessage(newsletterForm, 'Please enter a valid email address.', 'error');
             }
         });
@@ -198,28 +203,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showFormMessage(form, message, type) {
-        // Remove any existing message
         const existingMessage = form.querySelector('.form-message');
         if (existingMessage) {
             existingMessage.remove();
         }
         
-        // Create message element
         const messageEl = document.createElement('div');
         messageEl.className = `form-message ${type}`;
         messageEl.textContent = message;
-        
-        // Add to form
         form.appendChild(messageEl);
         
-        // Remove after delay
         setTimeout(() => {
             messageEl.remove();
         }, 4000);
     }
     
     // ================ TESTIMONIAL SLIDER ================
-    // Simple testimonial rotator - can be expanded for multiple testimonials
+    // Simple testimonial rotator (not in current HTML, but kept for future use)
     const testimonialSlider = document.querySelector('.testimonial-slider');
     
     if (testimonialSlider && testimonialSlider.querySelectorAll('.testimonial-card').length > 1) {
@@ -227,14 +227,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const testimonials = testimonialSlider.querySelectorAll('.testimonial-card');
         const totalSlides = testimonials.length;
         
-        // Hide all but first testimonial
         testimonials.forEach((testimonial, index) => {
             if (index > 0) {
                 testimonial.style.display = 'none';
             }
         });
         
-        // Create navigation dots
         const dotsContainer = document.createElement('div');
         dotsContainer.className = 'slider-dots';
         
@@ -248,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         testimonialSlider.appendChild(dotsContainer);
         
-        // Auto-rotate testimonials
         setInterval(nextSlide, 6000);
         
         function nextSlide() {
@@ -256,33 +253,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         function goToSlide(slideIndex) {
-            // Hide current slide
             testimonials[currentSlide].style.display = 'none';
-            
-            // Show new slide
             currentSlide = slideIndex;
             testimonials[currentSlide].style.display = 'block';
             
-            // Update dots
             document.querySelectorAll('.slider-dots .dot').forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
+                dot.classList.toggle('active', index === currentSlide);
             });
         }
     }
     
     // ================ LAZY LOADING IMAGES ================
-    // Use native lazy loading for browsers that support it
     if ('loading' in HTMLImageElement.prototype) {
         const images = document.querySelectorAll('img[loading="lazy"]');
         images.forEach(img => {
-            img.src = img.dataset.src;
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+            }
         });
     } else {
-        // Fallback for browsers that don't support native lazy loading
         const lazyImages = document.querySelectorAll('img[data-src]');
         
         if (lazyImages.length > 0) {
@@ -304,6 +293,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ================ INITIALIZATION ================
-    // Run any initialization code needed
     console.log('The Scribe\'s Den scripts initialized');
 });
