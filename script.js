@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlay = document.querySelector('.overlay');
     const body = document.body;
     const nav = document.getElementById('main-nav');
-    const scrollTopBtn = document.querySelector('.scroll-to-top'); // Updated to match your HTML class
+    const scrollTopBtn = document.querySelector('.scroll-to-top');
     const fadeElements = document.querySelectorAll('.fade-in');
     
     // ================ MOBILE MENU TOGGLE ================
@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ================ FADE-IN ANIMATIONS ================
-    // Use Intersection Observer for better performance
     if (fadeElements.length > 0) {
         const fadeInObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -101,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }, {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px' // Trigger slightly before element enters viewport
+            rootMargin: '0px 0px -50px 0px'
         });
         
         fadeElements.forEach(element => {
@@ -128,19 +127,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleSwipe() {
         const swipeThreshold = 100;
         
-        // Swipe right to open menu
         if (touchEndX - touchStartX > swipeThreshold && navLinks && !navLinks.classList.contains('active')) {
             toggleMenu();
         }
         
-        // Swipe left to close menu
         if (touchStartX - touchEndX > swipeThreshold && navLinks && navLinks.classList.contains('active')) {
             toggleMenu();
         }
     }
     
     // ================ ACCESSIBILITY SUPPORT ================
-    // Add keyboard navigation support for mobile menu
     if (navLinks) {
         const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
         const firstFocusableElement = navLinks.querySelectorAll(focusableElements)[0];
@@ -151,10 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
             const isEscPressed = e.key === 'Escape' || e.keyCode === 27;
             
-            // Close menu with ESC key
             if (isEscPressed && navLinks.classList.contains('active')) {
                 toggleMenu();
-                mobileMenuBtn.focus(); // Return focus to menu button
+                mobileMenuBtn.focus();
                 return;
             }
             
@@ -162,13 +157,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Trap focus in mobile menu when it's open
-            if (e.shiftKey) { // Tab + Shift (backwards)
+            if (e.shiftKey) {
                 if (document.activeElement === firstFocusableElement) {
                     lastFocusableElement.focus();
                     e.preventDefault();
                 }
-            } else { // Tab (forwards)
+            } else {
                 if (document.activeElement === lastFocusableElement) {
                     firstFocusableElement.focus();
                     e.preventDefault();
@@ -178,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ================ FORM VALIDATION ================
-    // Handle newsletter form submission (not in current HTML, but kept for future use)
     const newsletterForm = document.querySelector('.newsletter-form');
     
     if (newsletterForm) {
@@ -189,7 +182,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = emailInput.value.trim();
             
             if (isValidEmail(email)) {
-                showFormMessage(newsletterForm, 'Thank you for subscribing!', 'success');
+                // Simulate submission to info@thescribesden.com (frontend-only)
+                console.log(`Simulating email subscription: Sending ${email} to info@thescribesden.com`);
+                showFormMessage(newsletterForm, 'Thank you for subscribing! We’ll reach out from info@thescribesden.com.', 'success');
                 emailInput.value = '';
             } else {
                 showFormMessage(newsletterForm, 'Please enter a valid email address.', 'error');
@@ -219,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ================ TESTIMONIAL SLIDER ================
-    // Simple testimonial rotator (not in current HTML, but kept for future use)
     const testimonialSlider = document.querySelector('.testimonial-slider');
     
     if (testimonialSlider && testimonialSlider.querySelectorAll('.testimonial-card').length > 1) {
